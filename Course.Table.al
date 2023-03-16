@@ -1,7 +1,10 @@
 table 50100 "CRONUS Course"
 {
     DataClassification = CustomerContent;
-
+    Caption = 'Course';
+    LookupPageId = "CRONUS Course List";
+    DrillDownPageId = "CRONUS Course List";
+    
     fields
     {
         field(10; Code; Code[10])
@@ -9,13 +12,11 @@ table 50100 "CRONUS Course"
             DataClassification = CustomerContent;
             Caption = 'Code';
         }
-
-        field(20; Name; code[30])
+        field(20; Name; Text[30])
         {
             DataClassification = CustomerContent;
             Caption = 'Name';
         }
-
         field(30; Description; Text[50])
         {
             DataClassification = CustomerContent;
@@ -24,13 +25,13 @@ table 50100 "CRONUS Course"
         field(40; Type; Option)
         {
             DataClassification = CustomerContent;
+            OptionMembers = InstructorLed, eLearning, RemoteTraining;
+            OptionCaption = 'Instructor Led, e-Learning, Remote Training';
             Caption = 'Type';
-            OptionMembers = InstructorLed,eLearning,RemoteTraining;
-            OptionCaption = 'InstructorLed, eLearning, RemoteTraining';
         }
         field(50; Duration; Decimal)
         {
-            DataClassification = ToBeClassified;
+            DataClassification = CustomerContent;
             Caption = 'Duration';
         }
         field(60; Price; Decimal)
@@ -64,9 +65,7 @@ table 50100 "CRONUS Course"
             Caption = 'Instructor Name';
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = lookup(Resource.Name where("No." = field("Instructor Code")));
-
-
+            CalcFormula = lookup(Resource.Name where ("No."=field("Instructor Code")));
         }
     }
 
@@ -76,17 +75,13 @@ table 50100 "CRONUS Course"
         {
             Clustered = true;
         }
-        key(key1; "Instructor Code")
+        key(Key1; "Instructor Code")
         {
-
+            
         }
-
-        key(key2; Type)
+        key(Key2; Type)
         {
-
+            
         }
     }
-
-
-
 }
